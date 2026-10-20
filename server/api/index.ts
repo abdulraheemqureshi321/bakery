@@ -1,14 +1,14 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { Request, Response } from 'express';
 import app from '../src/app';
 import { connectDB } from '../src/config/db';
 
 /**
  * Serverless entrypoint when deploying the server directory directly on Vercel
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: Request, res: Response) {
   try {
     await connectDB();
-    return app(req as any, res as any);
+    return app(req, res);
   } catch (err: any) {
     console.error('Vercel Server API Error:', err);
     return res.status(500).json({

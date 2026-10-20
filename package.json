@@ -8,7 +8,6 @@
     "vercel-build": "node -e \"const fs = require('fs'), { execSync } = require('child_process'); if (fs.existsSync('client')) { execSync('npm --prefix client install && npm --prefix client run build', { stdio: 'inherit' }); } else if (fs.existsSync('src/app.ts')) { console.log('Server directory detected'); } else { execSync('npm install && npm run build', { stdio: 'inherit' }); }\""
   },
   "dependencies": {
-    "@vercel/node": "^3.2.30",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
