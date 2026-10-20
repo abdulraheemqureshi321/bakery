@@ -9,16 +9,30 @@ try {
   // Use system default if setting custom servers is restricted
 }
 
-export async function connectDB(): Promise<void> {
+let cachedConnection: typeof mongoose | null = null;
+
+export async function connectDB(): Promise<typeof mongoose> {
+  if (cachedConnection && mongoose.connection.readyState >= 1) {
+    return cachedConnection;
+  }
+
   try {
-    await mongoose.connect(env.MONGODB_URI);
+    const conn = await mongoose.connect(env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    cachedConnection = conn;
     console.log('✅ MongoDB connected');
+    return conn;
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
+    if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+      process.exit(1);
+    }
+    throw error;
   }
 }
 
 export async function disconnectDB(): Promise<void> {
   await mongoose.disconnect();
+  cachedConnection = null;
 }
