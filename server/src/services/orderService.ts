@@ -24,7 +24,9 @@ export interface CreateOrderDTO {
   paymentMethod: string;
   notes?: string;
   voucherId?: string; // memberVoucherId or voucher code
+  voucherCode?: string;
   redeemPoints?: number;
+  pointsToRedeem?: number;
 }
 
 export interface OrderPreviewResult {

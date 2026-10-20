@@ -159,7 +159,7 @@ export async function getAdminMembers(params: {
 /**
  * Admin: Get member details with order history stats
  */
-export async function getAdminMemberById(memberId: string) {
+export async function getAdminMemberById(memberId: string): Promise<any> {
   const member = await Member.findById(memberId)
     .select('-passwordHash -refreshToken -otpCode -otpExpiresAt')
     .lean();

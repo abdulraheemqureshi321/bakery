@@ -24,7 +24,8 @@ export async function getMyReferrals(req: AuthRequest, res: Response, next: Next
  */
 export async function validateReferralCode(req: Request, res: Response, next: NextFunction) {
   try {
-    const code = req.params.code?.trim().toUpperCase();
+    const rawCode = req.params.code ? String(req.params.code) : '';
+    const code = rawCode.trim().toUpperCase();
     if (!code) {
       return res.status(400).json({
         success: false,

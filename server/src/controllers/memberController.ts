@@ -104,7 +104,7 @@ export async function getAdminMembers(req: Request, res: Response, next: NextFun
  */
 export async function getAdminMember(req: Request, res: Response, next: NextFunction) {
   try {
-    const member = await memberService.getAdminMemberById(req.params.id);
+    const member = await memberService.getAdminMemberById(req.params.id as string);
     res.json({
       success: true,
       data: { member },
@@ -135,7 +135,7 @@ export async function createAdminMember(req: Request, res: Response, next: NextF
  */
 export async function updateAdminMember(req: Request, res: Response, next: NextFunction) {
   try {
-    const member = await memberService.adminUpdateMember(req.params.id, req.body);
+    const member = await memberService.adminUpdateMember(req.params.id as string, req.body);
     res.json({
       success: true,
       message: 'Member updated successfully',

@@ -11,7 +11,8 @@ export interface CreateVoucherDTO {
   minOrderAmount?: number;
   maxDiscount?: number;
   validFrom: string | Date;
-  validUntil: string | Date;
+  validUntil?: string | Date;
+  validDays?: number;
   totalUsageLimit?: number;
   perMemberLimit?: number;
   isActive?: boolean;
@@ -298,7 +299,7 @@ export async function validateAndCalculateVoucher(
             issuedAt: now,
             expiresAt: voucherDoc.validUntil,
           });
-          memberVoucher.voucher = voucherDoc;
+          (memberVoucher as any).voucher = voucherDoc;
         } else {
           throw new AppError('You have reached the maximum usage limit for this voucher', 400);
         }
