@@ -4,8 +4,8 @@
   "private": true,
   "description": "SoulTalk Pastry - Fullstack Artisanal Bakery Platform",
   "scripts": {
-    "build": "cd client && npm install && npm run build",
-    "vercel-build": "cd client && npm install && npm run build"
+    "build": "node -e \"const fs = require('fs'), { execSync } = require('child_process'); if (fs.existsSync('client')) { execSync('npm --prefix client install && npm --prefix client run build', { stdio: 'inherit' }); } else if (fs.existsSync('src/app.ts')) { console.log('Server directory detected'); } else { execSync('npm install && npm run build', { stdio: 'inherit' }); }\"",
+    "vercel-build": "node -e \"const fs = require('fs'), { execSync } = require('child_process'); if (fs.existsSync('client')) { execSync('npm --prefix client install && npm --prefix client run build', { stdio: 'inherit' }); } else if (fs.existsSync('src/app.ts')) { console.log('Server directory detected'); } else { execSync('npm install && npm run build', { stdio: 'inherit' }); }\""
   },
   "dependencies": {
     "@vercel/node": "^3.2.30",
