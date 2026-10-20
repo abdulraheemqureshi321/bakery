@@ -1,69 +1,60 @@
-# Deploying SoulTalk Pastry to Vercel
+# SoulTalk Pastry - Complete Fullstack Vercel Deployment Guide
 
-This guide walks you through deploying the SoulTalk Pastry platform to [Vercel](https://vercel.com).
-
----
-
-## 🚀 Recommended Architecture
-
-For production e-commerce platforms with background processing, order state machines, and continuous Excel parsing:
-- **Frontend (Storefront & Admin UI)**: Hosted on **Vercel** (Global Edge CDN, instantaneous loads, automated SSL).
-- **Backend (REST API)**: Hosted on **Render**, **Railway**, **Fly.io**, or **Ubuntu VPS** (Persistent Node.js environment connected to MongoDB Atlas).
+Deploy **both the frontend (Vite React SPA) and backend (Express API)** seamlessly to Vercel in a single unified deployment.
 
 ---
 
-## Part 1: Deploying the Frontend to Vercel (5-Minute Quick Setup)
+## How It Works
 
-Because your code is already pushed to GitHub at `https://github.com/abdulraheemqureshi321/bakery.git`, connecting it to Vercel takes only a few clicks:
-
-### Step 1: Import Project in Vercel
-1. Log in to your [Vercel Dashboard](https://vercel.com/dashboard).
-2. Click **Add New...** -> **Project**.
-3. Choose **Continue with GitHub** and select your repository: **`abdulraheemqureshi321/bakery`**.
-
-### Step 2: Configure Project Settings
-In the configuration screen:
-1. **Project Name**: `soultalk-pastry` (or your preferred name).
-2. **Framework Preset**: Select **Vite** (Vercel will usually auto-detect this).
-3. **Root Directory**: Click **Edit** and choose **`client`**. *(Crucial step!)*
-4. **Build and Output Settings**:
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-   *(All defaults match `client/vercel.json` already committed to the repo).*
-
-### Step 3: Add Environment Variables
-Under **Environment Variables**, add:
-- `VITE_API_URL`: The URL of your live backend API with `/api/v1` appended.
-  - *Example (if using Render)*: `https://soultalk-api.onrender.com/api/v1`
-  - *Example (if using custom domain)*: `https://api.soultalkpastry.com/api/v1`
-
-### Step 4: Click Deploy!
-- Vercel will build the frontend chunks in ~30 seconds and provide you with a live URL (e.g. `https://soultalk-pastry.vercel.app`).
-- Single Page App routing (e.g. `/account`, `/products`, `/admin`, `/r/:code`) works automatically due to `client/vercel.json`.
+1. **Frontend**: Built from `client/` into `client/dist`. Vercel automatically hosts it on its high-speed global Edge CDN.
+2. **Backend**: Powered by Vercel Serverless Functions via [`api/index.ts`](./api/index.ts). Vercel routes all `/api/*` network requests to your Express application connected to MongoDB Atlas.
+3. **Unified Domain**: Both run under the exact same domain (e.g. `https://your-bakery.vercel.app`), completely eliminating cross-origin CORS issues and cookie sharing complexities!
 
 ---
 
-## Part 2: Hosting the Backend API
+## 3-Step Vercel Deployment
 
-If you don't already have the backend running on a cloud host, here is the fastest 3-minute free deployment on **Render**:
+### Step 1: Import Your Repository on Vercel
+1. Go to your [Vercel Dashboard](https://vercel.com/dashboard) and click **"Add New..."** -> **"Project"**.
+2. Select your GitHub repository: **`abdulraheemqureshi321/bakery`** and click **Import**.
 
-1. Go to [dashboard.render.com](https://dashboard.render.com) and click **New +** -> **Web Service**.
-2. Connect your GitHub repository: `abdulraheemqureshi321/bakery`.
-3. Set the settings:
-   - **Root Directory**: `server`
-   - **Environment**: `Node`
-   - **Build Command**: `npm install && npm run build`
-   - **Start Command**: `npm start`
-4. Add your **Environment Variables** in Render:
-   - `PORT`: `5000`
-   - `NODE_ENV`: `production`
-   - `MONGODB_URI`: `mongodb+srv://admin_db_user:hPS8pBY3HjqcX3ef@cluster0.jkbffcv.mongodb.net/soultalk?appName=Cluster0`
-   - `JWT_ACCESS_SECRET`: `novex_super_secret_jwt_key_2024_change_in_production`
-   - `JWT_REFRESH_SECRET`: `novex_super_refresh_jwt_key_2024_change_in_production`
-   - `CLOUDINARY_CLOUD_NAME`: `urckuzfd`
-   - `CLOUDINARY_API_KEY`: `736848766536229`
-   - `CLOUDINARY_API_SECRET`: `rDbWDP6X4bMxzPy8FudmAEjthWA`
-   - `CLIENT_URL`: Your Vercel frontend URL (e.g. `https://soultalk-pastry.vercel.app`)
-5. Click **Deploy Web Service**.
-6. Copy the Render URL (e.g. `https://soultalk-pastry-api.onrender.com`) and paste `https://soultalk-pastry-api.onrender.com/api/v1` into your Vercel `VITE_API_URL` setting!
+### Step 2: Keep Default Root Directory
+- **Root Directory**: Leave it as **`./`** (Root of the project).
+- **Framework Preset**: Vercel will auto-detect or leave as **Other**.
+- **Build Settings**: Vercel will automatically read [`vercel.json`](./vercel.json) (Build command: `npm run vercel-build`, Output directory: `client/dist`).
+
+### Step 3: Add Production Environment Variables
+In the **Environment Variables** section on Vercel, copy and paste the following variables:
+
+| Variable Name | Production Value | Purpose |
+| :--- | :--- | :--- |
+| `NODE_ENV` | `production` | Production mode |
+| `MONGODB_URI` | `mongodb+srv://admin_db_user:hPS8pBY3HjqcX3ef@cluster0.jkbffcv.mongodb.net/soultalk?appName=Cluster0` | MongoDB Atlas cluster connection |
+| `JWT_ACCESS_SECRET` | `novex_super_secret_jwt_key_2024_change_in_production` | JWT signing secret for member sessions |
+| `JWT_REFRESH_SECRET` | `novex_super_refresh_jwt_key_2024_change_in_production` | Refresh token signing secret |
+| `JWT_ACCESS_EXPIRES_IN` | `15m` | Access token lifespan |
+| `JWT_REFRESH_EXPIRES_IN` | `7d` | Stay-logged-in session duration |
+| `CLOUDINARY_CLOUD_NAME` | `urckuzfd` | Cloudinary CDN cloud name |
+| `CLOUDINARY_API_KEY` | `736848766536229` | Cloudinary API Key |
+| `CLOUDINARY_API_SECRET` | `rDbWDP6X4bMxzPy8FudmAEjthWA` | Cloudinary API Secret |
+| `CLIENT_URL` | Leave blank or set to your Vercel URL once generated (e.g., `https://your-bakery.vercel.app`) | Used for shareable referral links |
+
+*(Note: `VITE_API_URL` is NOT required because the frontend automatically defaults to `/api/v1` on the same domain!)*
+
+---
+
+### Step 4: Click "Deploy" 🎉
+Vercel will:
+1. Run `npm install`.
+2. Build the optimized, code-split frontend assets into `client/dist`.
+3. Bundle the backend serverless function at `/api`.
+4. Provide you with your live URL (e.g., `https://bakery-xxx.vercel.app`).
+
+---
+
+## Verifying Your Live Deployment
+
+Once deployed:
+1. **Storefront**: Open the URL in your phone or browser -> Browse cakes, add to cart, and check out.
+2. **Health Check**: Visit `https://your-bakery.vercel.app/api/v1/health` -> Returns `{"success": true, "message": "SoulTalk Pastry API is running"}`.
+3. **Admin Portal**: Visit `https://your-bakery.vercel.app/admin` -> Log in with your admin credentials to manage products, orders, and members.
