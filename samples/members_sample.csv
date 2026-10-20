@@ -1,0 +1,11 @@
+Full Name,Mobile Phone,Date of Birth,Email Address
+John Tan,+60123456789,1990-05-15,john.tan@example.com
+Siti Nurhaliza,0198765432,24/11/1993,siti@example.com
+David Lee,601122334455,35460,david.lee@example.com
+Mei Ling,+60178889999,1998/12/30,meiling@example.com
+Ahmad Albab,0145556677,02-08-1985,
+,0129998877,1992-01-01,noname@example.com
+Bruce Wayne,invalid-phone-xyz,1980-02-19,bruce@wayne.com
+Clark Kent,0162223344,1982-06-18,not-an-email
+Duplicate Siti,0198765432,1994-01-01,dupsiti@example.com
+Alice Wonderland,+60121111111,1995-04-12,alice@example.com
