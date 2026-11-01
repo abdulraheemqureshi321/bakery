@@ -70,14 +70,14 @@ export const Navbar: React.FC = () => {
     <>
       {/* Desktop & Mobile Sticky Header */}
       <header className="sticky top-0 z-40 w-full bg-[var(--color-surface)]/95 backdrop-blur-md border-b border-[var(--color-border)] shadow-xs transition-all">
-        <div className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-9 h-[72px] sm:h-[78px] flex items-center justify-between gap-2 sm:gap-4">
+        <div className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-9 h-[62px] sm:h-[78px] flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Logo on Left */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] rounded-xl p-0.5 sm:p-1">
             <img
               src="/brand/soultalk-logo.png"
               alt="SoulTalk Pastry Logo"
-              className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-xl transition-transform group-hover:scale-105"
+              className="h-9 w-9 sm:h-12 sm:w-12 object-contain rounded-xl transition-transform group-hover:scale-105"
               onError={(e) => {
                 // Graceful fallback if image is still loading
                 (e.target as HTMLImageElement).src = '/products/strawberry-love-cake.png';
@@ -117,14 +117,14 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Right-Side Utility Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             
             {/* Language Switch Option (Segmented EN / 中文) */}
             <div className="inline-flex items-center p-0.5 rounded-full bg-[var(--color-surface-soft)] border border-[var(--color-border)] shadow-2xs">
               <button
                 type="button"
                 onClick={() => setLanguage('en')}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all cursor-pointer ${
+                className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold transition-all cursor-pointer ${
                   language === 'en'
                     ? 'bg-[var(--color-primary)] text-white shadow-xs font-extrabold scale-[1.02]'
                     : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
@@ -136,7 +136,7 @@ export const Navbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setLanguage('zh')}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all cursor-pointer ${
+                className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-bold transition-all cursor-pointer ${
                   language === 'zh'
                     ? 'bg-[var(--color-primary)] text-white shadow-xs font-extrabold scale-[1.02]'
                     : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
@@ -157,10 +157,10 @@ export const Navbar: React.FC = () => {
               <span>{isAuthenticated ? `${member?.pointsBalance ?? 0} ${t('header.points', 'pts')}` : t('header.earnPoints', 'Earn Points')}</span>
             </Link>
 
-            {/* Favourites Icon */}
+            {/* Favourites Icon (Desktop & Tablet) */}
             <Link
               to="/products"
-              className="relative p-2 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-surface-soft)] transition-all hover:-translate-y-[2px] active:scale-[0.98]"
+              className="hidden md:inline-flex relative p-2 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-surface-soft)] transition-all hover:-translate-y-[2px] active:scale-[0.98]"
               aria-label="Favourites"
               title="Saved Pastries"
             >
@@ -176,14 +176,14 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className={`relative p-2.5 rounded-full bg-[var(--color-surface-soft)] text-[var(--color-text)] hover:bg-[var(--color-sage)] hover:text-[var(--color-primary-dark)] border border-[var(--color-border)] transition-all hover:-translate-y-[2px] active:scale-[0.98] cursor-pointer ${
+              className={`relative p-2 sm:p-2.5 rounded-full bg-[var(--color-surface-soft)] text-[var(--color-text)] hover:bg-[var(--color-sage)] hover:text-[var(--color-primary-dark)] border border-[var(--color-border)] transition-all hover:-translate-y-[2px] active:scale-[0.98] cursor-pointer ${
                 isBagBouncing ? 'animate-cart-jiggle ring-2 ring-[var(--color-primary)]' : ''
               }`}
               aria-label={`Shopping bag with ${totalItemCount} items`}
             >
-              <ShoppingBag className="w-5 h-5 stroke-[1.8]" />
+              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
               {totalItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1.5 rounded-full bg-[var(--color-primary)] text-[var(--color-surface)] text-[11px] font-extrabold flex items-center justify-center shadow-xs animate-pop-in">
+                <span className="absolute -top-1 -right-1 min-w-[18px] sm:min-w-[20px] h-4 sm:h-5 px-1 rounded-full bg-[var(--color-primary)] text-[var(--color-surface)] text-[10px] sm:text-[11px] font-extrabold flex items-center justify-center shadow-xs animate-pop-in">
                   {totalItemCount}
                 </span>
               )}

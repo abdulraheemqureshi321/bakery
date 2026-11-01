@@ -265,36 +265,62 @@ export const ProductDetailPage: React.FC = () => {
   const displayTags = isZh ? activeItem.flavorTags_zh : activeItem.flavorTags;
 
   return (
-    <div className="min-h-screen bg-[#FAF6EE] text-[#4A362F] selection:bg-[#F5CDD2] selection:text-[#5B3D33] py-3 sm:py-6 px-3 sm:px-6 lg:px-10 pb-28 lg:pb-8">
+    <div className="min-h-screen bg-[#FAF6EE] text-[#4A362F] selection:bg-[#F5CDD2] selection:text-[#5B3D33] py-3 sm:py-6 px-3 sm:px-6 lg:px-10 pb-36 lg:pb-12">
       
-      {/* Top Outer Back Bar */}
-      <div className="max-w-[1320px] mx-auto mb-2 flex items-center justify-between">
+      {/* Top Outer Back Bar (Desktop / Tablet) */}
+      <div className="hidden lg:flex max-w-[1320px] mx-auto mb-2 items-center justify-between">
         <Link
-          to="/"
+          to="/products"
           className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#8A796F] hover:text-[#4A362F] transition-colors"
         >
           <ChevronLeft className="w-4 h-4 stroke-[2]" />
           <span>{t('product.backToCorner', 'BACK TO THE CORNER')}</span>
         </Link>
 
-        <span className="font-script text-sm sm:text-base text-[#A84852]">
+        <span className="font-script text-base text-[#A84852]">
           {isZh ? '心聊甜香 · 吉隆坡古仔路' : 'SoulTalk Pastry · Kuchai Lama'}
         </span>
       </div>
 
-      {/* Mobile-Only Header Header Bar (< lg) */}
-      <div className="lg:hidden max-w-[1320px] mx-auto mb-3 flex items-center justify-between">
-        <div>
-          <h1 className="font-script text-3xl sm:text-4xl text-[#3C2E28] tracking-tight leading-none">
-            {t('product.ourMenu', 'Our Menu')}
-          </h1>
-          <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-[#9E8B80] mt-0.5">
-            {t('product.bakedMorning', 'BAKED THIS MORNING · POURED WITH LOVE')}
-          </p>
+      {/* Mobile-Only Boutique Header & Landmark Card (< lg) */}
+      <div className="lg:hidden max-w-[1320px] mx-auto mb-3 space-y-2">
+        {/* Top Back Row */}
+        <div className="flex items-center justify-between">
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 border border-[#EADBCC] text-xs font-bold uppercase tracking-wider text-[#75645A] hover:bg-white shadow-2xs transition-all active:scale-95"
+          >
+            <ChevronLeft className="w-3.5 h-3.5 stroke-[2.2]" />
+            <span>{t('product.allTreats', 'ALL TREATS')}</span>
+          </Link>
+
+          <span className="font-script text-sm text-[#A84852]">
+            {isZh ? '心聊甜香 · 现烤出炉' : 'SoulTalk Pastry'}
+          </span>
         </div>
 
-        <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/70 border border-[#EADBCC] text-xs font-script text-[#D44A52] select-none">
-          <span>{t('product.youAreHere', 'you are here')}</span>
+        {/* Charming Corner Cafe Building Banner */}
+        <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-gradient-to-r from-[#FFFDF9] via-[#FAF5EC] to-[#F7EFE4] border border-[#EADBCC] shadow-2xs">
+          <div className="w-12 h-14 sm:w-14 sm:h-16 shrink-0 flex items-center justify-center">
+            <img
+              src="/images/corner/cafe_building_transparent.png"
+              alt="SoulTalk Strawberry Corner Cafe"
+              className="w-full h-full object-contain filter drop-shadow-2xs"
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <h1 className="font-script text-2xl sm:text-3xl text-[#3C2E28] leading-none">
+                {t('product.ourMenu', 'Our Menu')}
+              </h1>
+              <span className="font-script text-xs text-[#D44A52] rotate-[-2deg]">
+                {t('product.youAreHere', 'you are here ~')}
+              </span>
+            </div>
+            <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#9E8B80] mt-0.5 truncate">
+              {t('product.bakedMorning', 'BAKED THIS MORNING · POURED WITH LOVE')}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -302,7 +328,7 @@ export const ProductDetailPage: React.FC = () => {
       <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* ============================================================== */}
-        {/* LEFT COLUMN: Boutique Storefront & Whimsical Menu Annotations   */}
+        {/* LEFT COLUMN (Desktop): Storefront & Whimsical Menu Illustration */}
         {/* ============================================================== */}
         <div className="hidden lg:flex lg:col-span-4 flex-col justify-between pt-2 space-y-4">
           
@@ -355,7 +381,7 @@ export const ProductDetailPage: React.FC = () => {
         {/* ============================================================== */}
         {/* RIGHT COLUMN: The Dilum Sanjaya Showcase Card (Exact Match)     */}
         {/* ============================================================== */}
-        <div className="w-full lg:col-span-8 bg-gradient-to-br from-[#FFFDF9] via-[#FAF5EC] to-[#F7EFE4] border border-[#EADBCC] rounded-3xl sm:rounded-[2.5rem] p-4 sm:p-7 lg:p-8 shadow-[0_20px_50px_rgba(150,110,80,0.06)] space-y-5 sm:space-y-6">
+        <div className="w-full lg:col-span-8 bg-gradient-to-br from-[#FFFDF9] via-[#FAF5EC] to-[#F7EFE4] border border-[#EADBCC] rounded-3xl sm:rounded-[2.5rem] p-4 sm:p-7 lg:p-8 shadow-[0_20px_50px_rgba(150,110,80,0.06)] space-y-4 sm:space-y-6">
           
           {/* Upper Section: 3D Turntable Left + Product Details Right */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
@@ -363,6 +389,41 @@ export const ProductDetailPage: React.FC = () => {
             {/* Inner Left: 3D Turntable on Plate with "drag to turn it around" */}
             <div className="md:col-span-6 flex flex-col items-center justify-center">
               <Pastry3DViewer slug={activeItem.slug} fallbackImage={activeItem.thumb} />
+
+              {/* MOBILE TREAT CAROUSEL (Visible on mobile right below 3D model for instant switching) */}
+              <div className="md:hidden w-full pt-3 pb-1 border-t border-[#EEDBCA]/60 mt-3">
+                <div className="flex items-center justify-between px-1 mb-1.5">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#9E8B80]">
+                    {isZh ? '挑选甜点 · 360° 预览' : 'Select Treat · 360° View'}
+                  </span>
+                  <span className="font-script text-xs text-[#A84852]">{displayName}</span>
+                </div>
+                <div className="flex items-center justify-start gap-2 overflow-x-auto pb-1 px-1 scrollbar-none snap-x snap-mandatory">
+                  {BOUTIQUE_TREATS.map((treat) => {
+                    const isActive = activeItem.slug === treat.slug;
+                    const treatName = isZh ? treat.name_zh : treat.name;
+                    return (
+                      <button
+                        key={treat.id}
+                        type="button"
+                        onClick={() => handleSelectTreat(treat)}
+                        className={`group relative shrink-0 snap-start w-12 h-14 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                          isActive
+                            ? 'border-2 border-[#A33438] bg-white shadow-xs scale-105'
+                            : 'border border-[#EADBCC]/70 bg-[#FAF5EE]/90 hover:bg-white hover:border-[#DFD3C6]'
+                        }`}
+                        title={treatName}
+                      >
+                        <img
+                          src={treat.thumb}
+                          alt={treatName}
+                          className="w-8 h-10 object-contain pointer-events-none filter drop-shadow-2xs"
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             {/* Inner Right: Typography, Price, Description, Pills & Actions */}
@@ -372,13 +433,13 @@ export const ProductDetailPage: React.FC = () => {
               <div className="space-y-1">
                 <Link
                   to="/products"
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-[#9E8B80] hover:text-[#4A362F] transition-colors"
+                  className="hidden md:inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-[#9E8B80] hover:text-[#4A362F] transition-colors"
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
                   <span>{t('product.allTreats', 'ALL TREATS')}</span>
                 </Link>
 
-                <div className="text-[11px] font-bold tracking-widest text-[#9A877C] uppercase">
+                <div className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#9A877C] uppercase">
                   {displayCategory}
                 </div>
               </div>
@@ -403,7 +464,7 @@ export const ProductDetailPage: React.FC = () => {
                 {displayTags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/70 border border-[#DFD3C6] text-[#7E6E64]"
+                    className="text-[9px] font-bold uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded-full bg-white/70 border border-[#DFD3C6] text-[#7E6E64]"
                   >
                     {tag}
                   </span>
@@ -439,7 +500,7 @@ export const ProductDetailPage: React.FC = () => {
               {/* Stepper & Add to Bag Row */}
               <div className="flex items-center gap-2.5 sm:gap-3 pt-2 w-full">
                 {/* Rounded Stepper Capsule */}
-                <div className="inline-flex shrink-0 items-center h-10 px-2.5 rounded-full border border-[#DFD3C6] bg-white shadow-2xs">
+                <div className="inline-flex shrink-0 items-center h-11 px-3 rounded-full border border-[#DFD3C6] bg-white shadow-2xs">
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -465,7 +526,7 @@ export const ProductDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`h-10 px-5 sm:px-6 rounded-full bg-[#DF5056] hover:bg-[#D43D44] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_20px_rgba(223,80,86,0.3)] flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95 flex-1 max-w-[220px] ${
+                  className={`h-11 px-5 sm:px-6 rounded-full bg-[#DF5056] hover:bg-[#D43D44] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_20px_rgba(223,80,86,0.3)] flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95 flex-1 max-w-[220px] ${
                     isAddedSuccess ? 'ring-2 ring-[#F5CDD2]' : ''
                   }`}
                 >
@@ -485,9 +546,9 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Lower Section: Horizontal 8-Item Carousel matching screenshot */}
-          <div className="border-t border-[#EEDBCA]/60 pt-4">
-            <div className="flex items-center justify-start gap-2 overflow-x-auto pb-2 px-1 scrollbar-none snap-x snap-mandatory">
+          {/* DESKTOP TREAT CAROUSEL (Visible on md and lg at bottom of card) */}
+          <div className="hidden md:block border-t border-[#EEDBCA]/60 pt-4">
+            <div className="flex items-center justify-start gap-2 overflow-x-auto pb-1 px-1 scrollbar-none snap-x snap-mandatory">
               {BOUTIQUE_TREATS.map((treat) => {
                 const isActive = activeItem.slug === treat.slug;
                 const treatName = isZh ? treat.name_zh : treat.name;
@@ -496,7 +557,7 @@ export const ProductDetailPage: React.FC = () => {
                     key={treat.id}
                     type="button"
                     onClick={() => handleSelectTreat(treat)}
-                    className={`group relative shrink-0 snap-start w-12 h-14 sm:w-13 sm:h-15 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                    className={`group relative shrink-0 snap-start w-13 h-15 rounded-2xl flex items-center justify-center transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'border-2 border-[#A33438] bg-white shadow-xs scale-105'
                         : 'border border-[#EADBCC]/70 bg-[#FAF5EE]/90 hover:bg-white hover:border-[#DFD3C6]'
@@ -506,7 +567,7 @@ export const ProductDetailPage: React.FC = () => {
                     <img
                       src={treat.thumb}
                       alt={treatName}
-                      className="w-8 h-10 sm:w-9 sm:h-12 object-contain pointer-events-none filter drop-shadow-2xs"
+                      className="w-9 h-12 object-contain pointer-events-none filter drop-shadow-2xs"
                     />
                   </button>
                 );

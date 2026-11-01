@@ -321,8 +321,9 @@ export const HomePage: React.FC = () => {
                 </span>
               </div>
 
-              <div className="p-4 sm:p-5 rounded-[var(--radius-large)] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xs flex justify-center">
-                <SoulTalkStorefront size="large" showBadge={false} />
+              <div className="p-3 sm:p-5 rounded-[var(--radius-large)] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xs flex justify-center">
+                <SoulTalkStorefront size="small" showBadge={false} className="lg:hidden" />
+                <SoulTalkStorefront size="large" showBadge={false} className="hidden lg:flex" />
               </div>
             </div>
           </div>

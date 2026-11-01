@@ -1,9 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSettings } from '../../context/SettingsContext';
 import { MessageCircle } from 'lucide-react';
 
 export const FloatingWhatsAppButton: React.FC = () => {
   const { buildWhatsAppUrl } = useSettings();
+  const location = useLocation();
+
+  // Hide floating WhatsApp button on product detail pages to prevent overlapping the 3D model & Add to Bag
+  if (location.pathname.startsWith('/products/')) {
+    return null;
+  }
 
   return (
     <aside aria-label="WhatsApp Contact" className="fixed bottom-20 lg:bottom-8 right-4 sm:right-6 z-40">
