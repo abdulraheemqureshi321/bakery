@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
   );
 
   return (
-    <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] text-[var(--color-text)] pt-16 pb-24 lg:pb-12 mt-20 relative overflow-hidden">
+    <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] text-[var(--color-text)] pt-12 sm:pt-16 pb-28 lg:pb-12 mt-16 sm:mt-20 relative overflow-hidden">
       {/* Decorative floral watermark in background */}
       <div className="absolute right-0 bottom-0 w-96 h-96 bg-[var(--color-surface-soft)] rounded-full -mr-32 -mb-32 pointer-events-none opacity-40 blur-2xl" />
 

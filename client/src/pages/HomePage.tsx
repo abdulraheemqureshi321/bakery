@@ -256,10 +256,10 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-24 sm:space-y-28 pb-16 overflow-hidden">
+    <div className="space-y-16 sm:space-y-24 lg:space-y-28 pb-28 lg:pb-16 overflow-hidden">
       
       {/* 1. HERO SECTION */}
-      <section className="relative pt-6 sm:pt-10 lg:pt-14 px-4 sm:px-6 lg:px-9 max-w-[1240px] mx-auto">
+      <section className="relative pt-4 sm:pt-10 lg:pt-14 px-3.5 sm:px-6 lg:px-9 max-w-[1240px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
           {/* Left Column: Script / Editorial Heading, CTAs & Hand-drawn Storefront */}
@@ -560,20 +560,20 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5 sm:space-y-3">
                   <div>
                     <Link to={`/products/${item.slug}`}>
-                      <h3 className="font-serif-heading text-sm sm:text-base font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors leading-snug">
+                      <h3 className="font-serif-heading text-xs sm:text-base font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors leading-snug">
                         {getItemName(item)}
                       </h3>
                     </Link>
-                    <p className="text-xs text-[var(--color-text-muted)] line-clamp-2 mt-1 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[var(--color-text-muted)] line-clamp-2 mt-1 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
 
                   <div className="pt-2 flex items-center justify-between border-t border-[var(--color-border)]">
-                    <span className="font-serif-heading font-semibold text-sm sm:text-base text-[var(--color-text)]">
+                    <span className="font-serif-heading font-semibold text-xs sm:text-base text-[var(--color-text)]">
                       RM {item.price.toFixed(2)}
                     </span>
 

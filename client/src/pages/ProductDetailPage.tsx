@@ -265,7 +265,7 @@ export const ProductDetailPage: React.FC = () => {
   const displayTags = isZh ? activeItem.flavorTags_zh : activeItem.flavorTags;
 
   return (
-    <div className="min-h-screen bg-[#FAF6EE] text-[#4A362F] selection:bg-[#F5CDD2] selection:text-[#5B3D33] py-4 sm:py-6 px-3 sm:px-6 lg:px-10">
+    <div className="min-h-screen bg-[#FAF6EE] text-[#4A362F] selection:bg-[#F5CDD2] selection:text-[#5B3D33] py-3 sm:py-6 px-3 sm:px-6 lg:px-10 pb-28 lg:pb-8">
       
       {/* Top Outer Back Bar */}
       <div className="max-w-[1320px] mx-auto mb-2 flex items-center justify-between">
@@ -282,13 +282,29 @@ export const ProductDetailPage: React.FC = () => {
         </span>
       </div>
 
+      {/* Mobile-Only Header Header Bar (< lg) */}
+      <div className="lg:hidden max-w-[1320px] mx-auto mb-3 flex items-center justify-between">
+        <div>
+          <h1 className="font-script text-3xl sm:text-4xl text-[#3C2E28] tracking-tight leading-none">
+            {t('product.ourMenu', 'Our Menu')}
+          </h1>
+          <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-[#9E8B80] mt-0.5">
+            {t('product.bakedMorning', 'BAKED THIS MORNING · POURED WITH LOVE')}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/70 border border-[#EADBCC] text-xs font-script text-[#D44A52] select-none">
+          <span>{t('product.youAreHere', 'you are here')}</span>
+        </div>
+      </div>
+
       {/* Main Grid: Left Storefront Panel + Right Showcase Card */}
       <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* ============================================================== */}
         {/* LEFT COLUMN: Boutique Storefront & Whimsical Menu Annotations   */}
         {/* ============================================================== */}
-        <div className="lg:col-span-4 flex flex-col justify-between pt-2 space-y-4">
+        <div className="hidden lg:flex lg:col-span-4 flex-col justify-between pt-2 space-y-4">
           
           <div className="space-y-1">
             <h1 className="font-script text-4xl sm:text-5xl lg:text-6xl text-[#3C2E28] tracking-tight leading-none">
@@ -339,10 +355,10 @@ export const ProductDetailPage: React.FC = () => {
         {/* ============================================================== */}
         {/* RIGHT COLUMN: The Dilum Sanjaya Showcase Card (Exact Match)     */}
         {/* ============================================================== */}
-        <div className="lg:col-span-8 bg-gradient-to-br from-[#FFFDF9] via-[#FAF5EC] to-[#F7EFE4] border border-[#EADBCC] rounded-[2.5rem] p-5 sm:p-7 lg:p-8 shadow-[0_20px_50px_rgba(150,110,80,0.06)] space-y-6">
+        <div className="w-full lg:col-span-8 bg-gradient-to-br from-[#FFFDF9] via-[#FAF5EC] to-[#F7EFE4] border border-[#EADBCC] rounded-3xl sm:rounded-[2.5rem] p-4 sm:p-7 lg:p-8 shadow-[0_20px_50px_rgba(150,110,80,0.06)] space-y-5 sm:space-y-6">
           
           {/* Upper Section: 3D Turntable Left + Product Details Right */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
             
             {/* Inner Left: 3D Turntable on Plate with "drag to turn it around" */}
             <div className="md:col-span-6 flex flex-col items-center justify-center">
@@ -350,7 +366,7 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Inner Right: Typography, Price, Description, Pills & Actions */}
-            <div className="md:col-span-6 space-y-3.5">
+            <div className="md:col-span-6 space-y-3 sm:space-y-3.5">
               
               {/* Top breadcrumb & Category */}
               <div className="space-y-1">
@@ -368,7 +384,7 @@ export const ProductDetailPage: React.FC = () => {
               </div>
 
               {/* Title in Deep Terracotta / Strawberry Red Serif */}
-              <h2 className="font-serif italic text-3xl sm:text-4xl text-[#9E353B] font-medium tracking-tight">
+              <h2 className="font-serif italic text-2xl sm:text-3xl md:text-4xl text-[#9E353B] font-medium tracking-tight">
                 {displayName}
               </h2>
 
@@ -406,7 +422,7 @@ export const ProductDetailPage: React.FC = () => {
                           key={opt}
                           type="button"
                           onClick={() => handleVariantSelect(v.name, opt)}
-                          className={`px-3.5 py-1 rounded-full text-xs transition-all cursor-pointer ${
+                          className={`px-3 sm:px-3.5 py-1 rounded-full text-xs transition-all cursor-pointer ${
                             isSelected
                               ? 'bg-[#FCECEF] border border-[#E28D98] text-[#9E353B] font-bold shadow-2xs'
                               : 'bg-white/60 border border-[#DFD3C6] text-[#7E6E64] hover:bg-white'
@@ -421,9 +437,9 @@ export const ProductDetailPage: React.FC = () => {
               ))}
 
               {/* Stepper & Add to Bag Row */}
-              <div className="flex items-center gap-3 pt-2">
+              <div className="flex items-center gap-2.5 sm:gap-3 pt-2 w-full">
                 {/* Rounded Stepper Capsule */}
-                <div className="inline-flex items-center h-10 px-2.5 rounded-full border border-[#DFD3C6] bg-white shadow-2xs">
+                <div className="inline-flex shrink-0 items-center h-10 px-2.5 rounded-full border border-[#DFD3C6] bg-white shadow-2xs">
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -449,7 +465,7 @@ export const ProductDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`h-10 px-6 rounded-full bg-[#DF5056] hover:bg-[#D43D44] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_20px_rgba(223,80,86,0.3)] flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95 flex-1 max-w-[200px] ${
+                  className={`h-10 px-5 sm:px-6 rounded-full bg-[#DF5056] hover:bg-[#D43D44] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_20px_rgba(223,80,86,0.3)] flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95 flex-1 max-w-[220px] ${
                     isAddedSuccess ? 'ring-2 ring-[#F5CDD2]' : ''
                   }`}
                 >
@@ -471,7 +487,7 @@ export const ProductDetailPage: React.FC = () => {
 
           {/* Lower Section: Horizontal 8-Item Carousel matching screenshot */}
           <div className="border-t border-[#EEDBCA]/60 pt-4">
-            <div className="flex items-center justify-center sm:justify-start gap-2 overflow-x-auto pb-1 px-1">
+            <div className="flex items-center justify-start gap-2 overflow-x-auto pb-2 px-1 scrollbar-none snap-x snap-mandatory">
               {BOUTIQUE_TREATS.map((treat) => {
                 const isActive = activeItem.slug === treat.slug;
                 const treatName = isZh ? treat.name_zh : treat.name;
@@ -480,7 +496,7 @@ export const ProductDetailPage: React.FC = () => {
                     key={treat.id}
                     type="button"
                     onClick={() => handleSelectTreat(treat)}
-                    className={`group relative flex-shrink-0 w-11 h-13 sm:w-13 sm:h-15 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                    className={`group relative shrink-0 snap-start w-12 h-14 sm:w-13 sm:h-15 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'border-2 border-[#A33438] bg-white shadow-xs scale-105'
                         : 'border border-[#EADBCC]/70 bg-[#FAF5EE]/90 hover:bg-white hover:border-[#DFD3C6]'

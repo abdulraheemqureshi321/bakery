@@ -332,7 +332,7 @@ export const CatalogPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-9 py-10 space-y-10">
+    <div className="max-w-[1240px] mx-auto px-3.5 sm:px-6 lg:px-9 py-6 sm:py-10 space-y-8 sm:space-y-10 pb-28 lg:pb-12">
       
       {/* Header & Script Heading */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[var(--color-border)]">

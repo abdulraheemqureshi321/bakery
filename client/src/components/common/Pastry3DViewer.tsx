@@ -694,8 +694,8 @@ export const Pastry3DViewer: React.FC<Pastry3DViewerProps> = ({
 
     const handleResize = () => {
       if (!container || !rendererRef.current) return;
-      const newW = container.clientWidth || 320;
-      const newH = container.clientHeight || 300;
+      const newW = container.clientWidth || 300;
+      const newH = container.clientHeight || 260;
       camera.aspect = newW / newH;
       camera.updateProjectionMatrix();
       rendererRef.current.setSize(newW, newH);
@@ -703,8 +703,24 @@ export const Pastry3DViewer: React.FC<Pastry3DViewerProps> = ({
 
     window.addEventListener('resize', handleResize);
 
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const { width: newW, height: newH } = entry.contentRect;
+          if (newW > 0 && newH > 0 && rendererRef.current) {
+            camera.aspect = newW / newH;
+            camera.updateProjectionMatrix();
+            rendererRef.current.setSize(newW, newH);
+          }
+        }
+      });
+      resizeObserver.observe(container);
+    }
+
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (resizeObserver) resizeObserver.disconnect();
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
       if (rendererRef.current) {
         rendererRef.current.dispose();
@@ -751,10 +767,10 @@ export const Pastry3DViewer: React.FC<Pastry3DViewerProps> = ({
   const { language } = useLanguage();
 
   return (
-    <div className={`flex flex-col items-center justify-center ${className}`}>
+    <div className={`flex flex-col items-center justify-center w-full ${className}`}>
       {/* 3D WebGL Turntable Canvas Container */}
       <div
-        className="relative w-[280px] h-[260px] sm:w-[310px] sm:h-[280px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
+        className="relative w-full max-w-[280px] sm:max-w-[310px] h-[240px] sm:h-[280px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none touch-none"
         onMouseDown={(e) => handlePointerDown(e.clientX)}
         onMouseMove={(e) => handlePointerMove(e.clientX)}
         onMouseUp={handlePointerUp}
@@ -766,6 +782,7 @@ export const Pastry3DViewer: React.FC<Pastry3DViewerProps> = ({
           if (e.touches.length === 1) handlePointerMove(e.touches[0].clientX);
         }}
         onTouchEnd={handlePointerUp}
+        onTouchCancel={handlePointerUp}
       >
         <div ref={containerRef} className="w-full h-full" />
       </div>

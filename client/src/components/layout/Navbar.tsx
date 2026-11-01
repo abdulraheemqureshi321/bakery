@@ -70,24 +70,24 @@ export const Navbar: React.FC = () => {
     <>
       {/* Desktop & Mobile Sticky Header */}
       <header className="sticky top-0 z-40 w-full bg-[var(--color-surface)]/95 backdrop-blur-md border-b border-[var(--color-border)] shadow-xs transition-all">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-9 h-[78px] flex items-center justify-between gap-4">
+        <div className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-9 h-[72px] sm:h-[78px] flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Logo on Left */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] rounded-xl p-1">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] rounded-xl p-0.5 sm:p-1">
             <img
               src="/brand/soultalk-logo.png"
               alt="SoulTalk Pastry Logo"
-              className="h-11 w-11 sm:h-12 sm:w-12 object-contain rounded-xl transition-transform group-hover:scale-105"
+              className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-xl transition-transform group-hover:scale-105"
               onError={(e) => {
                 // Graceful fallback if image is still loading
                 (e.target as HTMLImageElement).src = '/products/strawberry-love-cake.png';
               }}
             />
             <div className="flex flex-col">
-              <span className="font-serif-heading font-semibold text-lg sm:text-xl text-[var(--color-text)] tracking-tight leading-none group-hover:text-[var(--color-primary)] transition-colors">
-                SoulTalk Pastry
+              <span className="font-serif-heading font-semibold text-base sm:text-xl text-[var(--color-text)] tracking-tight leading-none group-hover:text-[var(--color-primary)] transition-colors">
+                SoulTalk <span className="hidden xs:inline">Pastry</span>
               </span>
-              <span className="font-script text-xs sm:text-sm text-[var(--color-secondary-dark)] font-medium leading-tight mt-0.5">
+              <span className="font-script text-[11px] sm:text-sm text-[var(--color-secondary-dark)] font-medium leading-tight mt-0.5">
                 心聊甜香 • Kuchai Lama
               </span>
             </div>
@@ -305,7 +305,7 @@ export const Navbar: React.FC = () => {
 
       {/* Fixed Mobile Bottom Navigation Bar: Home, Menu, Bag, Member */}
       <nav
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-surface)]/95 backdrop-blur-md border-t border-[var(--color-border)] shadow-lg px-6 py-2 flex items-center justify-between"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-surface)]/95 backdrop-blur-md border-t border-[var(--color-border)] shadow-lg px-6 py-2.5 flex items-center justify-between pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))]"
         aria-label="Mobile Navigation"
       >
         <Link

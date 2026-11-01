@@ -46,7 +46,7 @@ export const CartDrawer: React.FC = () => {
         onClick={() => setIsCartOpen(false)}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-8 sm:pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-3 sm:pl-10">
         <div className="w-screen max-w-md bg-[var(--color-surface)] text-[var(--color-text)] shadow-[var(--shadow-floating)] flex flex-col border-l border-[var(--color-border)] animate-in slide-in-from-right duration-300">
           
           {/* Header */}
