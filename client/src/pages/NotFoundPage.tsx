@@ -1,79 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Cake, ArrowLeft, Home, ShoppingBag } from 'lucide-react';
 
 export const NotFoundPage: React.FC = () => {
   return (
-    <div style={{
-      minHeight: '70vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '2rem 1rem',
-      textAlign: 'center',
-    }}>
-      <div style={{
-        maxWidth: '480px',
-        backgroundColor: '#fff',
-        borderRadius: '16px',
-        padding: '3rem 2rem',
-        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
-        border: '1px solid #f1f5f9',
-      }}>
-        <div style={{ fontSize: '4.5rem', marginBottom: '1rem', lineHeight: 1 }}>🧁</div>
-        <h1 style={{
-          fontSize: '2rem',
-          fontWeight: 700,
-          color: '#0f172a',
-          marginBottom: '0.75rem',
-          letterSpacing: '-0.025em',
-        }}>
-          Page Not Found
-        </h1>
-        <p style={{
-          fontSize: '1rem',
-          color: '#64748b',
-          lineHeight: 1.6,
-          marginBottom: '2rem',
-        }}>
-          Oops! The treat or page you are looking for has either been enjoyed, moved, or never existed in our bakery.
-        </p>
+    <div className="min-h-[70vh] flex items-center justify-center px-4 py-16 text-center">
+      <div className="max-w-md w-full soultalk-card p-8 sm:p-10 bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-card)] space-y-5">
+        <div className="w-16 h-16 rounded-3xl bg-[var(--color-surface-soft)] text-[var(--color-secondary-dark)] border border-[var(--color-border)] flex items-center justify-center mx-auto shadow-xs">
+          <Cake className="w-8 h-8 stroke-[1.5]" />
+        </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link
-            to="/"
-            style={{
-              display: 'inline-block',
-              backgroundColor: '#d97706',
-              color: '#ffffff',
-              padding: '0.875rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: 600,
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#b45309')}
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#d97706')}
-          >
-            Return to Home
+        <div className="space-y-1">
+          <span className="font-script text-2xl text-[var(--color-secondary-dark)] font-semibold block">
+            心聊甜香 • 404
+          </span>
+          <h1 className="font-serif-heading text-2xl sm:text-3xl font-semibold text-[var(--color-text)]">
+            Page Not Found
+          </h1>
+          <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed pt-1">
+            The pastry or page you were seeking might have been enjoyed already, moved, or never existed in our bakery.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2.5 pt-2">
+          <Link to="/" className="btn-primary text-xs !min-h-[44px]">
+            <Home className="w-4 h-4 stroke-[2]" />
+            <span>Return to Home</span>
           </Link>
 
-          <Link
-            to="/products"
-            style={{
-              display: 'inline-block',
-              backgroundColor: '#f8fafc',
-              color: '#475569',
-              padding: '0.875rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: 600,
-              textDecoration: 'none',
-              border: '1px solid #e2e8f0',
-              transition: 'background-color 0.2s',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#f1f5f9')}
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#f8fafc')}
-          >
-            Browse Our Artisanal Cakes
+          <Link to="/products" className="btn-secondary text-xs !min-h-[44px]">
+            <ShoppingBag className="w-4 h-4 stroke-[2]" />
+            <span>Browse Fresh Menu</span>
           </Link>
         </div>
       </div>

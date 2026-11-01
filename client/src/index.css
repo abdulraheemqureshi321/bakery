@@ -1,30 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap');
 @import "tailwindcss";
 
 :root {
-  --brand-primary: #D4708F;
-  --brand-primary-hover: #BF5778;
-  --brand-secondary: #F5E6CC;
-  --font-family: 'Outfit', sans-serif;
+  --color-primary: #4F947C;
+  --color-primary-dark: #376E5D;
+
+  --color-secondary: #D7848F;
+  --color-secondary-dark: #A95662;
+
+  --color-background: #FFF8EF;
+  --color-surface: #FFFDF9;
+  --color-surface-soft: #FDF3EC;
+
+  --color-text: #4A362F;
+  --color-text-muted: #806D64;
+  --color-border: #E8D8CF;
+
+  --color-blush: #F5CDD2;
+  --color-sage: #DCEBE2;
+  --color-gold: #EFD49B;
+  --color-strawberry: #D45D67;
+  --color-cocoa: #5B3D33;
+
+  --color-success: #4F947C;
+  --color-warning: #C89445;
+  --color-error: #B94F59;
+
+  --shadow-soft: 0 8px 28px rgba(74, 54, 47, 0.08);
+  --shadow-card: 0 16px 42px rgba(74, 54, 47, 0.12);
+  --shadow-floating: 0 24px 60px rgba(74, 54, 47, 0.14);
+
+  --radius-small: 12px;
+  --radius-medium: 18px;
+  --radius-large: 26px;
+  --radius-xlarge: 34px;
+  --radius-pill: 999px;
+
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Legacy aliases for backward compatibility */
+  --brand-primary: var(--color-primary);
+  --brand-primary-hover: var(--color-primary-dark);
+  --brand-secondary: var(--color-surface-soft);
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-dark: var(--color-secondary-dark);
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-soft: var(--color-surface-soft);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-blush: var(--color-blush);
+  --color-sage: var(--color-sage);
+  --color-gold: var(--color-gold);
+  --color-strawberry: var(--color-strawberry);
+  --color-cocoa: var(--color-cocoa);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+
+  --font-script: 'Caveat', cursive;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Global resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 body {
-  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Nunito Sans', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(rgba(74, 54, 47, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.font-serif-display {
-  font-family: 'Playfair Display', serif;
+/* Typography Utility Classes */
+.font-script {
+  font-family: 'Caveat', cursive;
 }
 
-/* Glassmorphism helpers */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+.font-serif-heading {
+  font-family: 'Fraunces', Georgia, serif;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(229, 231, 235, 0.6);
+.font-sans-body {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.text-display-script {
+  font-family: 'Caveat', cursive;
+  font-size: 46px;
+  line-height: 1.0;
+  font-weight: 600;
+}
+@media (min-width: 950px) {
+  .text-display-script {
+    font-size: 68px;
+    line-height: 0.98;
+  }
+}
+
+.text-h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 38px;
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+@media (min-width: 950px) {
+  .text-h1 {
+    font-size: 60px;
+    line-height: 1.02;
+  }
+}
+
+.text-h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 500;
+}
+@media (min-width: 950px) {
+  .text-h2 {
+    font-size: 40px;
+    line-height: 1.08;
+  }
+}
+
+.text-h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+@media (min-width: 950px) {
+  .text-h3 {
+    font-size: 24px;
+  }
+}
+
+.text-eyebrow {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* SoulTalk Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  min-height: 48px;
+  padding: 0 22px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 14px rgba(79, 148, 124, 0.25);
+  transition: transform 0.2s var(--ease-standard), background-color 0.2s var(--ease-standard), box-shadow 0.2s var(--ease-standard);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 6px 20px rgba(79, 148, 124, 0.35);
+}
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(79, 148, 124, 0.2);
+}
+.btn-primary:focus-visible {
+  outline: 3px solid rgba(79, 148, 124, 0.45);
+  outline-offset: 2px;
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  min-height: 48px;
+  padding: 0 22px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s var(--ease-standard), background-color 0.2s var(--ease-standard), box-shadow 0.2s var(--ease-standard);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: var(--color-surface-soft);
+  box-shadow: 0 6px 20px rgba(74, 54, 47, 0.1);
+}
+.btn-secondary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.btn-secondary:focus-visible {
+  outline: 3px solid rgba(79, 148, 124, 0.45);
+  outline-offset: 2px;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--color-cocoa);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  min-height: 44px;
+  padding: 0 16px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform 0.2s var(--ease-standard), background-color 0.2s var(--ease-standard), color 0.2s var(--ease-standard);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-ghost:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: var(--color-surface-soft);
+  color: var(--color-primary);
+}
+.btn-ghost:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* SoulTalk Card & Paper Styling */
+.soultalk-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s var(--ease-emphasized), box-shadow 0.3s var(--ease-emphasized), border-color 0.3s var(--ease-emphasized);
+}
+
+.soultalk-card-hover {
+  transition: transform 0.3s var(--ease-emphasized), box-shadow 0.3s var(--ease-emphasized);
+}
+.soultalk-card-hover:hover {
+  transform: translateY(-8px) rotate(0.6deg);
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-secondary);
+}
+
+/* Continuous subtle motion for storefront elements */
+@keyframes treeDrift {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  50% {
+    transform: rotate(1.4deg) translateX(4px);
+  }
+}
+
+@keyframes petalFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-16px) translateX(8px) rotate(50deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes softSparkle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes curlingSteam {
+  0% {
+    transform: translateY(0) scaleX(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-8px) scaleX(1.15) translateX(2px);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-16px) scaleX(0.8) translateX(-2px);
+    opacity: 0;
+  }
+}
+
+@keyframes bellJiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-18deg); }
+  40% { transform: rotate(15deg); }
+  60% { transform: rotate(-10deg); }
+  80% { transform: rotate(6deg); }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes cartBagJiggle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-8deg); }
+  50% { transform: scale(1.2) rotate(8deg); }
+  75% { transform: scale(1.1) rotate(-4deg); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(239, 212, 155, 0.25), 0 16px 42px rgba(74, 54, 47, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(239, 212, 155, 0.5), 0 20px 48px rgba(74, 54, 47, 0.16);
+  }
+}
+
+.animate-tree-drift {
+  animation: treeDrift 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-petal-float {
+  animation: petalFloat 6s ease-in-out infinite;
+}
+
+.animate-soft-sparkle {
+  animation: softSparkle 3.5s ease-in-out infinite;
+}
+
+.animate-curling-steam {
+  animation: curlingSteam 3.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bell-jiggle {
+  animation: bellJiggle 0.8s ease-in-out;
+  transform-origin: top center;
+}
+
+.animate-gentle-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.animate-cart-jiggle {
+  animation: cartBagJiggle 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-pop-in {
+  animation: popIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -11,16 +11,16 @@ const SALT_ROUNDS = 12;
 const defaultSettings = [
   // Store Info
   { key: 'store_name', value: 'SoulTalk Pastry', label: 'Store Name', group: 'store', type: 'string' as const, isPublic: true },
-  { key: 'store_address', value: '123 Baker Street, Bangsar, 59100 Kuala Lumpur, Malaysia', label: 'Store Address', group: 'store', type: 'string' as const, isPublic: true },
+  { key: 'store_address', value: 'Kuchai Lama, 58200 Kuala Lumpur, Malaysia', label: 'Store Address', group: 'store', type: 'string' as const, isPublic: true },
   { key: 'store_phone', value: '+60123456789', label: 'Store Phone', group: 'store', type: 'string' as const, isPublic: true },
   { key: 'store_opening_hours', value: 'Tuesday - Sunday: 9:00 AM - 8:00 PM (Closed Mondays)', label: 'Opening Hours', group: 'store', type: 'string' as const, isPublic: true },
   { key: 'whatsapp_number', value: '60123456789', label: 'WhatsApp Number', group: 'store', type: 'string' as const, isPublic: true },
 
   // Brand
-  { key: 'brand_logo', value: '', label: 'Brand Logo URL', group: 'brand', type: 'string' as const, isPublic: true },
-  { key: 'brand_primary_color', value: '#D4708F', label: 'Primary Color', group: 'brand', type: 'string' as const, isPublic: true },
-  { key: 'brand_secondary_color', value: '#F5E6CC', label: 'Secondary Color', group: 'brand', type: 'string' as const, isPublic: true },
-  { key: 'brand_font', value: 'Outfit', label: 'Brand Font', group: 'brand', type: 'string' as const, isPublic: true },
+  { key: 'brand_logo', value: '/brand/soultalk-logo.png', label: 'Brand Logo URL', group: 'brand', type: 'string' as const, isPublic: true },
+  { key: 'brand_primary_color', value: '#4F947C', label: 'Primary Color', group: 'brand', type: 'string' as const, isPublic: true },
+  { key: 'brand_secondary_color', value: '#D7848F', label: 'Secondary Color', group: 'brand', type: 'string' as const, isPublic: true },
+  { key: 'brand_font', value: 'Fraunces', label: 'Brand Font', group: 'brand', type: 'string' as const, isPublic: true },
 
   // Localization
   { key: 'default_country_code', value: '+60', label: 'Default Country Code', group: 'localization', type: 'string' as const, isPublic: false },
@@ -165,6 +165,114 @@ async function seed() {
 
   // 5. Seed 8-10 sample products (including customizable cake & Party Bags)
   const productsData = [
+    {
+      name: 'Artisan Strawberry Tart',
+      slug: 'strawberry-tart',
+      price: 36,
+      category: createdCategories['petit-pastries'],
+      description: 'Crisp almond sable shell with Tahitian vanilla custard and fresh whole strawberries.',
+      images: [
+        {
+          url: '/products/strawberry-tart.png',
+          publicId: 'soultalk/products/strawberry-tart',
+        },
+      ],
+      variants: [
+        {
+          name: 'Crust Style',
+          options: ['Almond Sable Crust', 'Classic Butter Crust'],
+          priceModifiers: [0, 0],
+        },
+      ],
+      supportsCustomization: true,
+      featured: true,
+      isActive: true,
+    },
+    {
+      name: 'Orange Sunshine Cup',
+      slug: 'orange-sunshine-cup',
+      price: 22,
+      category: createdCategories['petit-pastries'],
+      description: 'Vanilla sponge, cloud cream and a bright orange finish.',
+      images: [
+        {
+          url: '/products/orange-sunshine-cup.png',
+          publicId: 'soultalk/products/orange-sunshine-cup',
+        },
+      ],
+      variants: [],
+      supportsCustomization: false,
+      featured: true,
+      isActive: true,
+    },
+    {
+      name: 'Strawberry Matcha Cup',
+      slug: 'strawberry-matcha-cup',
+      price: 24,
+      category: createdCategories['petit-pastries'],
+      description: 'Matcha sponge layered with strawberry cream and fresh berries.',
+      images: [
+        {
+          url: '/products/strawberry-matcha-cup.png',
+          publicId: 'soultalk/products/strawberry-matcha-cup',
+        },
+      ],
+      variants: [],
+      supportsCustomization: false,
+      featured: true,
+      isActive: true,
+    },
+    {
+      name: 'Strawberry Love Cake',
+      slug: 'strawberry-love-cake',
+      price: 138,
+      category: createdCategories['celebration-cakes'],
+      description: 'Soft vanilla layers, strawberry cream and fresh fruit.',
+      images: [
+        {
+          url: '/products/strawberry-love-cake.png',
+          publicId: 'soultalk/products/strawberry-love-cake',
+        },
+      ],
+      variants: [
+        {
+          name: 'Size',
+          options: ['6-inch (4-6 pax)', '8-inch (8-10 pax)', '10-inch (12-16 pax)'],
+          priceModifiers: [0, 45, 90],
+        },
+        {
+          name: 'Sweetness Level',
+          options: ['Regular (100%)', 'Less Sweet (70%)', 'Mild Sweet (50%)'],
+          priceModifiers: [0, 0, 0],
+        },
+      ],
+      supportsCustomization: true,
+      featured: true,
+      isActive: true,
+    },
+    {
+      name: 'Chocolate Treasure Cake',
+      slug: 'chocolate-treasure-cake',
+      price: 158,
+      category: createdCategories['celebration-cakes'],
+      description: 'Chocolate sponge, glossy ganache and a treasure of treats.',
+      images: [
+        {
+          url: '/products/chocolate-treasure-cake.png',
+          publicId: 'soultalk/products/chocolate-treasure-cake',
+        },
+      ],
+      variants: [
+        {
+          name: 'Size',
+          options: ['6-inch (4-6 pax)', '8-inch (8-10 pax)', '10-inch (12-16 pax)'],
+          priceModifiers: [0, 50, 100],
+        },
+      ],
+      supportsCustomization: true,
+      featured: true,
+      isActive: true,
+    },
     {
       name: 'Signature Velvet Bloom Cake',
       slug: 'signature-velvet-bloom-cake',

@@ -57,32 +57,43 @@ export const OtpLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
+    <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md space-y-6">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
-            <Smartphone className="w-6 h-6" />
+        
+        {/* Logo and Header */}
+        <div className="text-center space-y-3">
+          <Link to="/">
+            <img
+              src="/brand/soultalk-logo.png"
+              alt="SoulTalk Pastry Logo"
+              className="w-16 h-16 object-contain rounded-2xl mx-auto shadow-xs"
+            />
+          </Link>
+          <div className="space-y-1">
+            <span className="font-script text-2xl text-[var(--color-secondary-dark)] font-semibold block">
+              心聊甜香 • Quick Verification
+            </span>
+            <h1 className="font-serif-heading text-2xl sm:text-3xl font-semibold text-[var(--color-text)]">
+              {step === 'phone' ? 'SMS Code Sign In' : 'Enter Verification Code'}
+            </h1>
+            <p className="text-xs text-[var(--color-text-muted)]">
+              {step === 'phone'
+                ? 'Enter your mobile number to receive a secure sign-in code.'
+                : `A 6-digit code was sent to ${phone}.`}
+            </p>
           </div>
-          <h1 className="font-serif-display text-3xl font-bold text-stone-900 tracking-tight">
-            {step === 'phone' ? 'Verification Code Login' : 'Enter 6-Digit Code'}
-          </h1>
-          <p className="text-sm text-stone-600">
-            {step === 'phone'
-              ? 'Enter your registered phone number to receive a secure SMS code.'
-              : `A 6-digit code has been sent to ${phone}.`}
-          </p>
         </div>
 
-        <div className="glass-card p-6 sm:p-8 rounded-3xl shadow-sm border border-stone-200/80 space-y-6">
+        <div className="soultalk-card p-6 sm:p-8 rounded-[var(--radius-large)] shadow-[var(--shadow-card)] border border-[var(--color-border)] bg-[var(--color-surface)] space-y-5">
           {error && (
-            <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm">
+            <div className="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[var(--color-blush)]/60 border border-[var(--color-secondary)] text-[var(--color-error)] text-xs">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           {message && (
-            <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm">
+            <div className="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[var(--color-sage)] text-[var(--color-primary-dark)] text-xs font-bold">
               <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{message}</span>
             </div>
@@ -91,8 +102,8 @@ export const OtpLoginPage: React.FC = () => {
           {step === 'phone' ? (
             <form onSubmit={handleRequestOtp} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1.5">
-                  Registered Phone Number
+                <label className="block text-xs font-bold uppercase tracking-wider text-[var(--color-text)] mb-1.5">
+                  Registered Mobile Number
                 </label>
                 <input
                   type="tel"
@@ -100,86 +111,60 @@ export const OtpLoginPage: React.FC = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="012-345 6789"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-stone-200 bg-white text-stone-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-rose-400"
+                  className="w-full px-4 py-2.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text)] placeholder-[var(--color-text-muted)] focus:outline-hidden focus:ring-2 focus:ring-[var(--color-primary)]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white font-medium text-sm shadow-sm transition-all disabled:opacity-50"
+                className="btn-primary w-full text-xs !min-h-[46px]"
               >
-                {loading ? (
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <span>Send Verification Code</span>
-                )}
+                {loading ? 'Sending Code...' : 'Send SMS Verification Code'}
               </button>
             </form>
           ) : (
             <form onSubmit={handleVerifyOtp} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1.5">
-                  6-Digit OTP Code
+                <label className="block text-xs font-bold uppercase tracking-wider text-[var(--color-text)] mb-1.5">
+                  6-Digit SMS PIN
                 </label>
                 <input
                   type="text"
-                  maxLength={6}
                   value={code}
-                  onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ''))}
+                  onChange={(e) => setCode(e.target.value)}
                   placeholder="123456"
+                  maxLength={6}
                   required
-                  autoFocus
-                  className="w-full px-4 py-3 rounded-xl border border-stone-200 bg-white text-stone-900 text-center tracking-widest text-xl font-mono focus:outline-hidden focus:ring-2 focus:ring-rose-400"
+                  className="w-full px-4 py-2.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-center text-lg font-mono tracking-widest font-bold text-[var(--color-text)] focus:outline-hidden focus:ring-2 focus:ring-[var(--color-primary)]"
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={loading || code.length !== 6}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white font-medium text-sm shadow-sm transition-all disabled:opacity-50"
+                disabled={loading}
+                className="btn-primary w-full text-xs !min-h-[46px]"
               >
-                {loading ? (
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <span>Verify Code & Sign In</span>
-                )}
+                {loading ? 'Verifying...' : 'Verify Code & Sign In'}
               </button>
 
-              <div className="flex items-center justify-between pt-2 text-xs">
-                <button
-                  type="button"
-                  onClick={() => setStep('phone')}
-                  className="inline-flex items-center gap-1 text-stone-500 hover:text-stone-800"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Change number</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleRequestOtp}
-                  disabled={loading}
-                  className="inline-flex items-center gap-1 text-rose-600 hover:text-rose-700 font-medium"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                  <span>Resend code</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setStep('phone')}
+                className="btn-ghost w-full text-xs"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Change Mobile Number</span>
+              </button>
             </form>
           )}
 
-          {/* Dev Notice */}
-          <div className="p-3 rounded-xl bg-stone-100 text-[11px] text-stone-600 leading-relaxed border border-stone-200">
-            💡 <strong>Dev Mode:</strong> OTP codes are logged in the backend server terminal (SmsProvider dev implementation).
+          <div className="pt-2 border-t border-[var(--color-border)] text-center">
+            <Link to="/login" className="text-xs text-[var(--color-primary-dark)] font-bold hover:underline">
+              ← Return to Standard Password Sign In
+            </Link>
           </div>
         </div>
-
-        <p className="text-center text-xs text-stone-600">
-          Prefer password login?{' '}
-          <Link to="/login" className="font-semibold text-rose-600 hover:text-rose-700">
-            Sign in with password
-          </Link>
-        </p>
       </div>
     </div>
   );

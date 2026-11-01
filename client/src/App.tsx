@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
 import { CartProvider } from './context/CartContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { AppLayout } from './components/layout/AppLayout';
 import { AdminLayout } from './components/layout/AdminLayout';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
@@ -12,9 +13,12 @@ import { AdminRoute } from './components/common/AdminRoute';
 // Core entry storefront page loaded eagerly
 import { HomePage } from './pages/HomePage';
 
-// Lazy-loaded storefront pages for code-splitting & fast mobile load
+// Lazy-loaded storefront pages
 const CatalogPage = lazy(() => import('./pages/CatalogPage').then((m) => ({ default: m.CatalogPage })));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage').then((m) => ({ default: m.ProductDetailPage })));
+const OurStoryPage = lazy(() => import('./pages/OurStoryPage').then((m) => ({ default: m.OurStoryPage })));
+const GalleryPage = lazy(() => import('./pages/GalleryPage').then((m) => ({ default: m.GalleryPage })));
+const EventsPage = lazy(() => import('./pages/EventsPage').then((m) => ({ default: m.EventsPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
 const LoginPage = lazy(() => import('./pages/LoginPage').then((m) => ({ default: m.LoginPage })));
 const RegisterPage = lazy(() => import('./pages/RegisterPage').then((m) => ({ default: m.RegisterPage })));
@@ -28,6 +32,8 @@ const ReferralRedirectPage = lazy(() => import('./pages/ReferralRedirectPage').t
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 // Lazy-loaded admin portal pages
+const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage').then((m) => ({ default: m.AdminDashboardPage })));
+const AdminContentPage = lazy(() => import('./pages/admin/AdminContentPage').then((m) => ({ default: m.AdminContentPage })));
 const AdminOrdersPage = lazy(() => import('./pages/admin/AdminOrdersPage').then((m) => ({ default: m.AdminOrdersPage })));
 const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage').then((m) => ({ default: m.AdminProductsPage })));
 const AdminProductFormPage = lazy(() => import('./pages/admin/AdminProductFormPage').then((m) => ({ default: m.AdminProductFormPage })));
@@ -36,6 +42,7 @@ const AdminMembersPage = lazy(() => import('./pages/admin/AdminMembersPage').the
 const AdminMemberImportPage = lazy(() => import('./pages/admin/AdminMemberImportPage').then((m) => ({ default: m.AdminMemberImportPage })));
 const AdminVouchersPage = lazy(() => import('./pages/admin/AdminVouchersPage').then((m) => ({ default: m.AdminVouchersPage })));
 const AdminReferralsPage = lazy(() => import('./pages/admin/AdminReferralsPage').then((m) => ({ default: m.AdminReferralsPage })));
+const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage').then((m) => ({ default: m.AdminReportsPage })));
 const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage').then((m) => ({ default: m.AdminSettingsPage })));
 
 const PageLoadingFallback: React.FC = () => (
@@ -50,14 +57,14 @@ const PageLoadingFallback: React.FC = () => (
     <div style={{
       width: '40px',
       height: '40px',
-      border: '3px solid #fef3c7',
-      borderTopColor: '#d97706',
+      border: '3px solid #E8D8CF',
+      borderTopColor: '#4F947C',
       borderRadius: '50%',
       animation: 'spin 0.8s linear infinite',
     }} />
     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-    <span style={{ fontSize: '0.875rem', color: '#78716c', fontWeight: 500 }}>
-      Loading SoulTalk Pastry...
+    <span style={{ fontSize: '0.875rem', color: '#806D64', fontWeight: 600 }}>
+      SoulTalk Pastry (心聊甜香)...
     </span>
   </div>
 );
@@ -75,9 +82,10 @@ export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <SettingsProvider>
-        <AuthProvider>
-          <CartProvider>
-            <BrowserRouter>
+        <LanguageProvider>
+          <AuthProvider>
+            <CartProvider>
+              <BrowserRouter>
               <Suspense fallback={<PageLoadingFallback />}>
                 <Routes>
                   {/* Storefront Layout */}
@@ -85,6 +93,9 @@ export const App: React.FC = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/products" element={<CatalogPage />} />
                     <Route path="/products/:slug" element={<ProductDetailPage />} />
+                    <Route path="/story" element={<OurStoryPage />} />
+                    <Route path="/gallery" element={<GalleryPage />} />
+                    <Route path="/events" element={<EventsPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route
@@ -137,7 +148,9 @@ export const App: React.FC = () => {
                       </AdminRoute>
                     }
                   >
-                    <Route index element={<Navigate to="/admin/orders" replace />} />
+                    <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                    <Route path="dashboard" element={<AdminDashboardPage />} />
+                    <Route path="content" element={<AdminContentPage />} />
                     <Route path="orders" element={<AdminOrdersPage />} />
                     <Route path="products" element={<AdminProductsPage />} />
                     <Route path="products/new" element={<AdminProductFormPage />} />
@@ -147,6 +160,7 @@ export const App: React.FC = () => {
                     <Route path="members/import" element={<AdminMemberImportPage />} />
                     <Route path="vouchers" element={<AdminVouchersPage />} />
                     <Route path="referrals" element={<AdminReferralsPage />} />
+                    <Route path="reports" element={<AdminReportsPage />} />
                     <Route path="settings" element={<AdminSettingsPage />} />
                   </Route>
 
@@ -161,8 +175,9 @@ export const App: React.FC = () => {
             </BrowserRouter>
           </CartProvider>
         </AuthProvider>
-      </SettingsProvider>
-    </QueryClientProvider>
+      </LanguageProvider>
+    </SettingsProvider>
+  </QueryClientProvider>
   );
 };
 
